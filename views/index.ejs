@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>MyBook | Book Reviewer</title>
+
+</head>
+<body>
+    <header>
+        <nav>
+           <div class="navbar">
+                <h1 id="title">MyBook</h1>
+                <button id="add" value="new" onclick="window.location.href = '/new';">+</button>
+                <div class="logout">
+                    <form name="log_out" action="/logout" method="POST">
+                        <a href="javascript: submit()">Log out</a>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <p class="sub-title">Are you an avid reader looking to share your latest literary 
+                discovery? Or perhaps you're searching for your next favorite book and want to see
+                what others think? Our platform allows you to post books that you’ve read,
+                leave your own reviews, and invite the public to provide their opinions,
+                ratings, and in-depth feedback!</p>
+                <div class="books" id="nobook">
+                <% books.forEach((book) => { %>
+                    <div class="book">
+                        <a href="/book/<%= book.id %>"><img class="book_cover" src=<%=book.image_url %> alt=<% book.title %>></a>
+                </div>
+                <% }); %> 
+                
+            </div>
+        </div>
+    </main>
+
+        <footer>
+        </footer>
+
+        <script>
+            function submit() {
+                document.log_out.submit();
+            }
+
+            const books = <%-JSON.stringify(locals.books); %>; 
+            if (!books || books.length === 0) {
+                var no_books = document.getElementById("nobook");
+                no_books.style.display = "none";
+            } 
+
+            function fadeOutCovers() {
+                const bookCovers = document.querySelectorAll('.book_cover'); 
+                bookCovers.forEach(cover => {
+                    $(cover).hide(); 
+                });
+
+                setTimeout(() => {
+                    bookCovers.forEach((cover, index) => {
+                    $(cover).delay(index * 200).slideDown(500); });
+                }, 500);
+            }
+          
+            if (sessionStorage.getItem('slideUp') === 'true') {
+                fadeOutCovers();
+                sessionStorage.removeItem('slideUp');
+            }
+
+        
+   // Prevent navigating back to the previous page after logout
+  if (performance.navigation.type === 2) {
+      window.location.reload(true);
+  }
+
+  sessionStorage.clear();
+  localStorage.clear();
+
+</script>
+    
+</body>
+</html>

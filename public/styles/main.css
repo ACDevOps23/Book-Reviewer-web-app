@@ -1,0 +1,505 @@
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 100px;
+    background-color: rgb(196, 235, 255);
+    margin-bottom: 20px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.navbar {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    background-color: rgb(87, 169, 236);
+    box-shadow: 3px 3px 6px rgb(156, 197, 247);
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 0 1px; controls the left and right padding */
+    z-index: 11;
+    height: 70px; 
+}
+
+h1 {
+    flex-grow: 1;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 35px;
+    color: white;
+}
+
+a { text-decoration: none; }
+
+#title {
+    margin-left: 65px;
+}
+
+#add {
+    border-radius: 50px;
+    box-shadow: 2px 2px rgb(2, 23, 182);
+    color:rgb(6, 104, 185);
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+#add:hover { background-color: rgb(0, 157, 255); }
+#add:active { background-color: blue; }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    flex-wrap: nowrap;
+}
+
+.sub-title {
+    font-family: 'Courier New', Courier, monospace; 
+    color: rgb(0, 0, 37);
+    font-size: 20px; 
+    text-align: left;
+    font-weight: bolder;
+    max-width: 40em;
+    margin-bottom: 50px;
+}
+
+.book_cover { 
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    box-shadow: 7px 7px 8px rgb(0, 2, 138);
+    border-radius: 10px;
+    height: 250px;
+ }
+
+ .book_cover:hover {
+    transition: transform 0.2s;
+    transform: scale(1.05);
+ }
+
+ #book_cover:hover { box-shadow: 7px 7px 8px rgb(0, 0, 0); }
+
+ .books {  
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   align-items: center;
+   flex-wrap: wrap;
+   gap: 50px;
+   width: 100%;
+   max-width: 500px;
+   border: 1px solid transparent;
+   border-radius: 10px;
+   padding-top: 20px;
+   padding-left: 30px;
+   padding-right: 30px;
+   padding-bottom: 20px;
+   background-color: rgb(87, 169, 236);
+ }
+
+ .book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+ }
+
+ .book_description {
+    margin-top: 25px;
+    font-weight: bold;
+    font-size: larger;
+    color: rgb(8, 3, 36);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ }
+
+ .containers {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 50px;
+    margin: 0 10px;
+}
+
+.sub {
+    text-align: left;
+    margin-bottom: 20px;
+    color: black;
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 25px;
+    font-weight: 300;
+ }
+
+ .new_book {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px 30px;
+    margin: 50px;
+    margin-top: 60px;
+    margin-bottom: 100px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    align-items: center;
+    background-color: rgba(74, 122, 180, 0.5);
+    backdrop-filter: blur(10px);
+    max-height: fit-content;
+ }
+
+ .book_form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    gap: 25px;
+ }
+
+ .book_form > input[type='text'] {
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    outline: none;
+ }
+
+ .button_container {
+    display: flex;
+    justify-content: center;
+ }
+
+ .button_container > button {
+    margin-top: 20px;
+    padding: 15px 10px;
+    font-size: 14px;
+    background-color: #3aa1fa;
+    cursor: pointer;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 300px;
+    color: white;
+    font-size: 20px;
+    border: none;
+ }
+
+ button:hover { background-color:rgb(8, 3, 36); }
+ #heading { color: black; }
+
+.book_container {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: flex-start;
+   background-color: rgb(0, 0, 69);
+   border-top-right-radius: 40px;
+   border-bottom-right-radius: 40px;
+   width: 80em;
+   max-width: fit-content;
+   padding: 0 10px;
+   margin-right: 100px;
+   margin-bottom: 20px;
+   box-shadow: 2px 2px 6px rgb(0, 0, 111);
+   flex-wrap: nowrap;
+   flex-shrink: 1;
+}
+
+
+#bimg { 
+   margin-top: 20px;
+   width: 200px;
+   height: 300px;
+   border-radius: 10px;
+}
+
+.novel {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   max-width: 300px;
+   word-wrap: break-word;
+   flex-wrap: wrap;
+   flex-shrink: 1;
+}
+
+.b-description {
+   margin: 0px 20px;
+   font-family: 'Courier New', Courier, monospace;
+   font-size: 20px;
+   color: rgb(255, 255, 255);
+}
+
+#desc-title { 
+   text-align: center; 
+   margin-bottom: 0;
+   font-size: larger;
+}
+
+#desc { text-align: left;}
+#btitle { text-align: center; font-size: 30px;}
+
+.details { 
+   display: flex;
+   justify-content: space-evenly;
+   margin-top: 65px;
+}
+
+#author { margin-right: 30px; }
+.details > p { font-family: Arial, Helvetica, sans-serif; }
+
+.review-container {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   border: 1px solid transparent;
+   background-color: rgba(69, 112, 252, 0.401);
+   box-shadow: 25px 25px 25px rgba(129, 124, 124, 0.2);
+   backdrop-filter: blur(4px);
+   margin-top: 30px;
+   margin-right: 30px;
+   margin-left: 30px;
+   padding: 0 20px;
+   font-size: 20px;
+   text-align: center;
+   border-radius: 20px;
+   height: fit-content;
+   flex-wrap: nowrap;
+}
+
+#heading-review { flex-shrink: 1; }
+
+.small-circle {
+   width: 7px;
+   height: 7px;
+   background-color: transparent;
+   border: 3px solid rgb(87, 169, 236);
+   border-radius: 50%;
+   margin-top: 0px;
+   margin-bottom: 0px; 
+ }
+ 
+ .circle {
+   width: 100%;
+   height: fit-content;
+   background-color: white;
+   border-radius: 25px;
+   color: black;
+   max-width: fit-content;
+   font-size: 20px;
+   padding: 5px 10px;
+   
+ }
+ 
+.circle > p {
+   word-wrap: break-word;
+   flex-wrap: nowrap;
+   flex-shrink: 1;
+}
+
+ .line {
+   width: 4px;
+   height: 50px;
+   background-color: lightblue;
+   margin: 0 10px;
+ }
+
+ #add-review { 
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top: 50px;
+ }
+
+ #reviewForm {
+   border: 1px solid transparent;
+   background-color: rgba(69, 112, 252, 0.401);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 200px;
+   margin-top: 50px;
+   margin-right: 30px;
+   margin-left: 30px;
+   padding: 0 20px 50px;
+   font-size: 20px;
+   text-align: center;
+   border-radius: 20px;
+   height: fit-content;
+   flex-wrap: wrap;
+}
+
+.review-form {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   max-width: 500px;
+   margin-top: 10px;
+   gap: 25px;
+}
+
+textarea {
+   width: 100%;
+   max-height: max-content;
+   resize: none;
+   border: none;
+}
+
+.review-form > textarea {
+   border: none;
+   border-radius: 15px;
+}
+
+.review-form > input[type="text"] {
+   height: 30px;
+   border: 1px solid transparent;
+   border-radius: 15px;
+}
+
+.b-container {
+   display: flex;
+   justify-content: center;
+}
+
+.b-container > button {
+   margin-top: 25px;
+   height: 50px;
+   width: 80px;
+   border: 1px solid transparent;
+   border-radius: 12px;
+   color: white;
+   background-color: #3aa1fa;
+}
+
+.b-container > button:hover {
+   background-color: black;
+   cursor: pointer;
+}
+
+.review-block {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+h2 { font-family: 'Courier New', Courier, monospace; color: white; }
+
+.delete-book {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   align-items: flex-end;
+   position: fixed;
+   bottom: 1rem;
+   right: 1rem;
+   z-index: 100;
+}
+
+.delete-book > form > button > img {
+   width: 30px;
+   height: 30px;
+}
+
+.delete-book > form > button {
+   width: 60px;
+   height: 60px;
+   background-color: rgba(35, 84, 243);
+   box-shadow: 4px 4px 1px rgb(2, 23, 182);
+   border: 1px solid transparent;
+   border-radius: 50%;
+}
+
+.delete-book > form > button:hover {
+   background-color: #3aa1fa;
+   cursor: pointer;
+}
+
+.error-message {
+   background-color: rgb(255, 116, 116);
+   color: white;
+   border: 1px solid transparent;
+   padding: 10px;
+   text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.login_container {
+   height: 70vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 0 50px;
+   margin: 0 20px;
+}
+
+.login {
+   border: 3px solid rgb(0, 114, 254);
+   border-radius: 15px;
+   padding: 40px;
+   display: flex;
+   width: 100%;
+   max-width: 500px;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.login_form {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   max-width: 400px;
+   width: 100%; 
+}
+
+.logout {
+   /* border: 0.1rem solid white; */
+   font-family: 'Courier New', Courier, monospace;
+   font-weight: bold;
+   margin-left: 10px;
+   margin-right: 5px;
+   text-align: center;
+}
+
+.logout a {
+   color: white;
+}
+
+ @media(max-width: 320px) { .container { margin: 0; padding: 0 20px; } }
+ @media(max-width: 768px) {
+    .container {padding: 0; }
+    .containers { margin: 5px; padding: 0 20px; }
+    .new_book {margin: 10px; }
+    .sub { font-size: 20px; }
+    #bimg { max-width: 110px; height: 180px; }
+    #btitle { font-size: 20px; }
+    .b-description { font-size: 15px; }
+    .book_container {flex-direction: column; margin-right: 0; }
+    .novel {max-width: none; }
+    .details {margin-top: 20px; }
+    #author {margin-left: 20px; }
+    .review-container { flex-direction: column; margin: 10px 0; }
+    #reviewForm { margin: 0; margin-top: 10px; }
+    #add-review { margin: 0; }
+  }

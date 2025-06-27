@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>New Book | Book Reviewer</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="navbar">
+                <a href="/"><h1>MyBook</h1></a>
+                <div class="logout">
+                    <form name="log_out" action="/logout" method="POST">
+                        <a href="javascript: submit()">Log out</a>
+                    </form>
+             </div>
+        </nav>
+    </header>
+        <main>
+            <div class="error-message" id="error" style="display: none;"></div>            
+
+        <div class="containers"> 
+            <p class="sub">Add a new book for the public to see and review!</p>
+            <div class="new_book">
+              <h1 id="heading">New Book</h1>
+                    <form class="book_form" action="/new" method="POST">
+                        <input id="enter" type="text" name="isbn" placeholder="ISBN" required style="border-color: <%= locals.errors && errors.length > 0 ? 'red' : 'transparent' %>;">
+                        <div class="button_container">
+                            <button id="add" type="submit">+</button>
+                        </div>
+                    </form>
+                </div> 
+            </div>
+            </main>
+
+            <script>
+
+            function submit() {
+                document.log_out.submit();
+            }
+                document.addEventListener("DOMContentLoaded", function() {
+                    const errors = <%- JSON.stringify(locals.errors || []) %>; // Fetch server-side errors if any exist
+                    const errorMessageDiv = document.getElementById("error");
+            
+                    // Display server-side errors on page load
+                    if (errors.length > 0) {
+                        errorMessageDiv.style.display = "block";
+                        errors.forEach(error => {
+                            const errorMessage = document.createElement('p');
+                            errorMessage.textContent = error.msg;
+                            errorMessageDiv.appendChild(errorMessage);
+                        });
+                    }
+            
+                    // Client-side validation on form submission
+                    document.querySelector(".book_form").addEventListener("submit", function(e) {
+                        const isbnInput = document.querySelector("input[name='isbn']").value;
+                        const regex = /^(?=(?:[^0-9]*[0-9]){10}(?:(?:[^0-9]*[0-9]){3})?$)[\d-]+$/;
+            
+                        // Clear client-side error message but leave server errors if present
+                        const clientError = document.getElementById("client-error");
+                        if (clientError) clientError.remove(); // Clear previous client-side error
+                        
+                        if (!regex.test(isbnInput)) {
+                            e.preventDefault(); // Stop form submission for invalid ISBN
+                
+                            // Add a client-side error message
+                            const clientErrorMessage = document.createElement('p');
+                            clientErrorMessage.id = "client-error";
+                            clientErrorMessage.textContent = "Please enter a valid ISBN (10 or 13 digits).";
+                            errorMessageDiv.appendChild(clientErrorMessage);
+                            errorMessageDiv.style.display = "block";
+                        } else {
+                            sessionStorage.setItem('slideUp', 'true');
+                        }
+                    });
+                });
+            </script>
+            
+    </body>
+</html>

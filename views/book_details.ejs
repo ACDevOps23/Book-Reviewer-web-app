@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Book | Book Reviewer</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="navbar">
+                <a href="/"><h1>MyBook</h1></a>
+                <div class="logout">
+                    <form name="log_out" action="/logout" method="POST">
+                        <a href="javascript: submit()">Log out</a>
+                    </form>
+             </div>
+        </nav>
+    </header>
+
+    <main>
+        <% if (locals.book) { %>
+        <div class="book_container">
+            <div class="novel">
+                <img id="bimg" src="<%=book.image_url %>">
+                <h1 id="btitle"><%=book.title %></h1>
+            </div>
+            <div class="b-description">
+                <h3 id="desc-title">Description</h3>
+                <p id="desc"><%=book.description %></p>
+                <div class="details">
+                <p id="isbn">ISBN: <%=book.isbn %></p>
+                <p id="author">Author: <%=book.author_name %></p>
+                </div>
+                <div class="details">
+                <p id="rating"><%= book.rating == null ? "None" : book.rating %></p>
+                <p id="published">Published: <%=book.date  %></p>
+            </div>
+        </div>
+        </div> 
+
+        <% if (locals.reviews.length > 0) { %>
+            <div class="review-container" id="review-container">
+            <h1 id="heading-review">Reviews</h1>
+            <% reviews.forEach((review) => { %>
+                <div class="review-block">
+                    <div class="circle" id="rev">
+                        <p><%=review.review %></p>
+                    </div> 
+                    <div class="small-circle"></div>
+                    <div class="line"></div>
+                </div>
+            <% }); %>
+          </div>
+        <% } %>
+            
+            <div id="add-review"><button id="add" value="add_review" onclick="addReview()">+</button></div>
+
+          <div class="error-message" id="error" style="display: none; margin-top: 10px;"></div>
+
+          <div id="reviewForm" style="display: none;">
+            <h2>Add Review</h2>
+            <form class="review-form" method="POST" action="/review/<%=book.id %>">
+                <input type="hidden" name="bookID" value="<%= book.id %>">
+                <textarea id="rev" name="review_text" rows="10" cols="15" placeholder="e.g. I really liked this book!"></textarea>
+                <!-- <input type="text" name="review_text" placeholder="e.g. 5"> -->
+                <div class="b-container">
+                <button type="submit">Post</button>
+                </div>
+            </form>
+      </div>
+
+      <div class="delete-book">
+        <form method="post" action="/book/<%= book.id %>">
+            <button type="submit"><img src="/styles/images/bx-trash.svg"></button>
+        </form>
+    
+    </div>
+    <% } %>
+    <footer>
+    </footer>
+
+    <script>
+
+        function submit() {
+            document.log_out.submit();
+        }
+
+        function addReview() {
+            var reviewForm = document.getElementById("reviewForm");
+            if (reviewForm.style.display === "none") {
+                setTimeout(() => { reviewForm.style.display = "flex";}, 10); 
+            } else {
+                setTimeout(() => { reviewForm.style.display = "none"; }, 10);
+            }
+        }
+
+        document.querySelector(".review-form").addEventListener("submit", function(e) {
+            const rev_text = document.querySelector("#rev").value;
+            const error = document.getElementById("error");
+            const text_error = document.getElementById("text-error");
+            const regex = /^\s*$/;
+
+            if (text_error) {
+                text_error.remove();
+            }
+            
+            if (regex.test(rev_text)) {
+                e.preventDefault();
+                const message = document.createElement("p");
+                message.id = "text-error";
+                message.textContent = "Please enter a review!";
+                error.appendChild(message);
+                error.style.display = "block";
+                document.getElementById("rev").style.borderColor = "red";
+            }
+        });
+
+    </script>
+
+</body>
+</html>
