@@ -7,6 +7,17 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# pgAdmin configuration and history files (user-specific)
+.pgadmin/
+pgadmin4.db
+pgadmin4.log
+.pgadmin4/
+
+# If you're running it in a container or virtual environment
+pgadmin_data/
+pgadmin_logs/
+
+
 # General
 .DS_Store
 .AppleDouble
